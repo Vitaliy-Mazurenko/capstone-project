@@ -1,0 +1,93 @@
+@use './variables' as v;
+@use './mixins' as m;
+@use 'sass:color';
+
+// Базовые расширяемые блоки стилей
+
+// Основной контейнер секции
+%section-container {
+  padding: v.$spacing-xlarge 0;
+  width: 100%;
+}
+
+// Фоновый контейнер с акцентным фоном
+%section-accent-background {
+  background-color: color.adjust(v.$primary-color, $lightness: 35%);
+}
+
+// Базовые стили для всех карточек
+%card-base {
+  background-color: white;
+  border-radius: v.$border-radius-large;
+  box-shadow: v.$box-shadow;
+  transition: v.$transition-base;
+  overflow: hidden;
+  
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: v.$box-shadow-large;
+  }
+}
+
+// Текстовое содержимое карточки
+%card-content {
+  padding: v.$spacing-medium;
+}
+
+// Заголовок карточки
+%card-title {
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: v.$spacing-small;
+  color: v.$text-color;
+}
+
+// Интерактивные элементы
+%interactive-element {
+  cursor: pointer;
+  transition: v.$transition-base;
+  
+  &:hover {
+    opacity: 0.9;
+  }
+  
+  &:active {
+    transform: scale(0.98);
+  }
+}
+
+// Гриды
+%responsive-grid {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  gap: v.$spacing-large;
+  
+  @include m.respond-to(md) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  @include m.respond-to(lg) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+// Flex контейнеры
+%flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+// Формы и поля ввода
+%form-field {
+  border: 1px solid #ddd;
+  border-radius: v.$border-radius;
+  padding: v.$spacing-small v.$spacing-medium;
+  transition: v.$transition-base;
+  
+  &:focus {
+    outline: none;
+    border-color: v.$primary-color;
+    box-shadow: 0 0 0 2px rgba(v.$primary-color, 0.2);
+  }
+} 

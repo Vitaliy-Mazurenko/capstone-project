@@ -1,0 +1,1103 @@
+@use './variables' as v;
+@use './mixins' as m;
+@use './extensions';
+@use 'sass:color';
+
+// Определяем card-benefits как placeholder
+%card-benefits {
+  margin-top: v.$spacing-small;
+  margin-bottom: v.$spacing-medium;
+  
+  p {
+    margin-bottom: v.$spacing-small;
+  }
+  
+  ul {
+    list-style: disc;
+    margin-left: 20px;
+    color: v.$secondary-color;
+    font-size: 14px;
+  }
+}
+
+// Base styles
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: v.$font-family-base;
+  font-size: v.$font-size-base;
+  line-height: v.$line-height-base;
+  color: v.$text-color;
+  background-color: v.$background-color;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+a {
+  color: v.$primary-color;
+  text-decoration: none;
+  transition: v.$transition-base;
+}
+
+ul {
+  list-style: none;
+}
+
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 v.$spacing-medium;
+  
+  @include m.respond-to(lg) {
+    padding: 0 v.$spacing-large;
+  }
+}
+
+.section-title {
+  @include m.heading(28px);
+
+  text-align: center;
+  margin-bottom: v.$spacing-large;
+  
+  @include m.respond-to(md) {
+    font-size: 32px;
+    margin-bottom: v.$spacing-xlarge;
+  }
+}
+
+// Buttons
+.btn {
+  @include m.button-style(v.$primary-color, white, color.adjust(v.$primary-color, $lightness: -10%));
+  
+  &--secondary {
+    @include m.button-style(v.$secondary-color, white, color.adjust(v.$secondary-color, $lightness: -10%));
+  }
+  
+  &--large {
+    padding: v.$spacing-medium v.$spacing-large;
+    font-size: 18px;
+  }
+}
+
+// Header & Navigation
+.header {
+  background-color: white;
+  box-shadow: 0 2px 10px rgb(0 0 0 / 10%);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  
+  .container {
+    @include m.flex(row, space-between, center);
+
+    padding-top: v.$spacing-medium;
+    padding-bottom: v.$spacing-medium;
+  }
+  
+  &__logo {
+    h2 {
+      font-size: 24px;
+      font-weight: 700;
+      color: v.$primary-color;
+    }
+  }
+  
+  &__search {
+    @include m.flex(row, flex-end, center);
+    
+    input {
+      padding: 8px 12px;
+      border: 1px solid #ddd;
+      border-radius: v.$border-radius;
+      margin-right: 5px;
+    }
+    
+    button {
+      background: v.$primary-color;
+      border: none;
+      padding: 8px;
+      border-radius: v.$border-radius;
+      cursor: pointer;
+      color: white;
+    }
+  }
+}
+
+.main-nav {
+  &-list {
+    @include m.flex(row, center, center);
+  }
+  
+  &-item {
+    position: relative;
+    margin: 0 v.$spacing-medium;
+  }
+  
+  &-link {
+    color: v.$text-color;
+    font-weight: 500;
+    padding: v.$spacing-small 0;
+    
+    &.active, &:hover {
+      color: v.$primary-color;
+    }
+  }
+  
+  @include m.respond-to(md) {
+    display: flex;
+  }
+  
+  @media (max-width: (v.$breakpoint-md - 1px)) {
+    display: none;
+  }
+}
+
+.nav-submenu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: white;
+  width: 200px;
+  box-shadow: v.$box-shadow;
+  border-radius: v.$border-radius;
+  padding: v.$spacing-small 0;
+  
+  li {
+    padding: 0;
+    
+    a {
+      display: block;
+      padding: v.$spacing-small v.$spacing-medium;
+      color: v.$text-color;
+    }
+  }
+}
+
+.main-nav-item:hover .nav-submenu {
+  display: block;
+}
+
+.footer {
+  background: v.$dark-color;
+  color: white;
+  padding: v.$spacing-xlarge 0 v.$spacing-large;
+  
+  &-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: v.$spacing-large;
+    margin-bottom: v.$spacing-xlarge;
+    
+    @include m.respond-to(md) {
+      grid-template-columns: 2fr 1fr 1fr;
+    }
+  }
+  
+  &-info {
+    h2 {
+      font-size: 24px;
+      margin-bottom: v.$spacing-medium;
+      color: white;
+    }
+    
+    p {
+      color: rgb(255 255 255 / 70%);
+    }
+  }
+  
+  &-links, &-contact {
+    h3 {
+      font-size: 18px;
+      margin-bottom: v.$spacing-medium;
+      color: white;
+    }
+    
+    ul {
+      display: flex;
+      flex-direction: column;
+      gap: v.$spacing-small;
+      
+      a {
+        color: rgb(255 255 255 / 70%);
+        transition: v.$transition-base;
+        
+        &:hover {
+          color: white;
+          text-decoration: none;
+        }
+      }
+    }
+    
+    p {
+      color: rgb(255 255 255 / 70%);
+      margin-bottom: v.$spacing-small;
+    }
+  }
+  
+  &-bottom {
+    border-top: 1px solid rgb(255 255 255 / 10%);
+    padding-top: v.$spacing-large;
+    text-align: center;
+    
+    p {
+      color: rgb(255 255 255 / 50%);
+    }
+  }
+}
+
+.nav-submenu li a:hover {
+  background-color: rgba(v.$primary-color, 0.1);
+  color: v.$primary-color;
+  text-decoration: none;
+}
+
+// Call to action section
+.cta-section {
+  text-align: center;
+  padding: v.$spacing-xlarge 0;
+  background-color: color.adjust(v.$primary-color, $lightness: 45%);
+  
+  h2 {
+    margin-bottom: v.$spacing-medium;
+    font-size: 28px;
+    
+    @include m.respond-to(md) {
+      font-size: 32px;
+    }
+  }
+  
+  p {
+    margin-bottom: v.$spacing-large;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    color: v.$secondary-color;
+  }
+  
+  .cta-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: v.$spacing-medium;
+    justify-content: center;
+    align-items: center;
+    
+    @include m.respond-to(md) {
+      flex-direction: row;
+    }
+  }
+}
+
+// Home page styles
+.hero {
+  padding: v.$spacing-large 0;
+  background-color: color.adjust(v.$primary-color, $lightness: 35%);
+  
+  @include m.respond-to(md) {
+    padding: v.$spacing-xlarge 0;
+  }
+}
+
+.slider {
+  position: relative;
+  overflow: hidden;
+  border-radius: v.$border-radius-large;
+  
+  &__track {
+    @include m.flex(row, flex-start, stretch, nowrap);
+
+    transition: transform 0.5s ease;
+  }
+  
+  &__slide {
+    flex: 0 0 100%;
+    position: relative;
+    
+    img {
+      width: 100%;
+      height: 400px;
+      object-fit: cover;
+    }
+  }
+  
+  &__content {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: v.$spacing-large;
+    background: linear-gradient(to top, rgb(0 0 0 / 80%), rgb(0 0 0 / 0%));
+    color: white;
+    
+    h2 {
+      margin-bottom: v.$spacing-small;
+      font-size: 28px;
+      
+      @include m.respond-to(md) {
+        font-size: 36px;
+      }
+    }
+    
+    p {
+      margin-bottom: v.$spacing-medium;
+      font-size: 16px;
+      
+      @include m.respond-to(md) {
+        font-size: 18px;
+      }
+    }
+  }
+  
+  &__controls {
+    button {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgb(0 0 0 / 50%);
+      color: white;
+      border: none;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      font-size: 20px;
+      cursor: pointer;
+      transition: v.$transition-base;
+      
+      &:hover {
+        background: rgb(0 0 0 / 80%);
+      }
+    }
+  }
+  
+  &__prev {
+    left: v.$spacing-medium;
+  }
+  
+  &__next {
+    right: 16px;
+  }
+  
+  &__dots {
+    position: absolute;
+    bottom: v.$spacing-medium;
+    left: 0;
+    right: 0;
+
+    @include m.flex(row, center, center);
+    
+    .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: rgb(255 255 255 / 50%);
+      margin: 0 5px;
+      cursor: pointer;
+      transition: v.$transition-base;
+      
+      &.active {
+        background: white;
+      }
+      
+      &:hover {
+        background: rgb(255 255 255 / 80%);
+      }
+    }
+  }
+}
+
+// Featured section
+.featured {
+  @extend %section-container;
+  
+  &__grid {
+    @extend %responsive-grid;
+
+    margin-bottom: v.$spacing-xlarge;
+  }
+  
+  &__cta {
+    text-align: center;
+  }
+}
+
+// Course card
+.course-card {
+  @extend %card-base;
+
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  
+  &__image {
+    position: relative;
+    width: 100%;
+    padding-top: 100%; // Создаем квадратный контейнер независимо от ширины
+    overflow: hidden;
+    
+    img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover; // Сохраняем соотношение сторон, обрезая по необходимости
+      object-position: center; // Центрируем изображение
+      transition: transform 0.5s ease;
+    }
+  }
+  
+  &:hover &__image img {
+    transform: scale(1.05);
+  }
+  
+  &__content {
+    @extend %card-content;
+
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  &__title {
+    @extend %card-title;
+  }
+  
+  &__instructor {
+    color: v.$secondary-color;
+    margin-bottom: v.$spacing-small;
+  }
+  
+  &__meta {
+    @include m.flex(row, flex-start, center);
+
+    margin-bottom: v.$spacing-small;
+    flex-wrap: wrap;
+    gap: v.$spacing-small;
+    
+    .badge {
+      background: color.adjust(v.$primary-color, $lightness: 30%);
+      color: v.$primary-color;
+      padding: 4px 8px;
+      border-radius: v.$border-radius;
+      font-size: 12px;
+      font-weight: 500;
+    }
+  }
+  
+  &__description {
+    margin-bottom: v.$spacing-medium;
+    color: v.$secondary-color;
+    font-size: 14px;
+    flex: 1;
+  }
+  
+  &__footer {
+    @include m.flex(row, space-between, center);
+
+    margin-top: auto;
+    
+    .price {
+      font-weight: 700;
+      color: v.$primary-color;
+      font-size: 18px;
+    }
+    
+    .rating {
+      @include m.flex(row, flex-start, center);
+      
+      .stars {
+        color: #ffc107;
+        margin-right: 5px;
+      }
+    }
+  }
+  
+  &__cta {
+    margin-top: v.$spacing-medium;
+    
+    .btn {
+      @extend %interactive-element;
+    }
+  }
+  
+  &__benefits {
+    @extend %card-benefits;
+  }
+}
+
+// Benefits section
+.benefits {
+  @extend %section-container;
+  @extend %section-accent-background;
+  
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: v.$spacing-large;
+    
+    @include m.respond-to(md) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    
+    @include m.respond-to(lg) {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+}
+
+.benefit-card {
+  @extend %card-base;
+
+  padding: v.$spacing-large;
+  text-align: center;
+  
+  &__icon {
+    font-size: 48px;
+    margin-bottom: v.$spacing-medium;
+  }
+  
+  h3 {
+    margin-bottom: v.$spacing-small;
+    font-size: 20px;
+  }
+  
+  p {
+    color: v.$secondary-color;
+  }
+}
+
+// Gallery page
+.page-title {
+  @extend %section-accent-background;
+
+  padding: v.$spacing-large 0;
+  text-align: center;
+  
+  h1 {
+    @include m.heading(32px);
+    
+    @include m.respond-to(md) {
+      font-size: 42px;
+    }
+  }
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: v.$spacing-small;
+  
+  label {
+    font-weight: 500;
+  }
+  
+  input, textarea {
+    @extend %form-field;
+  }
+}
+
+.gallery {
+  @extend %section-container;
+  
+  &__controls {
+    margin-bottom: v.$spacing-large;
+    
+    @include m.respond-to(md) {
+      @include m.flex(row, space-between, flex-start);
+    }
+
+    right: 0;
+    display: none;
+  }
+  
+  &__search {
+    margin-bottom: v.$spacing-medium;
+    
+    input {
+      width: 100%;
+      padding: v.$spacing-small v.$spacing-medium;
+      border: 1px solid #ddd;
+      border-radius: v.$border-radius;
+      font-size: 16px;
+      
+      &:focus {
+        outline: none;
+        border-color: v.$primary-color;
+      }
+    }
+    
+    @include m.respond-to(md) {
+      flex: 0 0 40%;
+      margin-bottom: 0;
+    }
+  }
+  
+  &__filters {
+    @include m.flex(row, flex-start, center);
+
+    flex-wrap: wrap;
+    gap: v.$spacing-medium;
+    
+    .filter-group {
+      @include m.flex(row, flex-start, center);
+
+      gap: v.$spacing-small;
+      
+      label {
+        font-weight: 500;
+      }
+      
+      select {
+        padding: 8px v.$spacing-small;
+        border: 1px solid #ddd;
+        border-radius: v.$border-radius;
+        
+        &:focus {
+          outline: none;
+          border-color: v.$primary-color;
+        }
+      }
+    }
+  }
+  
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: v.$spacing-large;
+    margin-bottom: v.$spacing-xlarge;
+    
+    @media (min-width: 480px) and (max-width: (v.$breakpoint-md - 1px)) {
+      grid-template-columns: repeat(2, 1fr); // 2 колонки в промежуточных размерах
+      gap: v.$spacing-medium;
+
+      .course-card {
+        &__image {
+          object-fit: scale-down;
+        }
+      }
+    }
+    
+    @include m.respond-to(md) {
+      grid-template-columns: repeat(2, 1fr);
+      gap: v.$spacing-large;
+    }
+    
+    @include m.respond-to(lg) {
+      grid-template-columns: repeat(3, 1fr);
+      gap: v.$spacing-xlarge;
+    }
+  }
+  
+  &__pagination {
+    @include m.flex(column, center, center);
+
+    gap: v.$spacing-large;
+    
+    @include m.respond-to(md) {
+      @include m.flex(row, center, center);
+    }
+  }
+}
+
+// Pagination
+.pagination {
+  @include m.flex(row, center, center);
+
+  gap: v.$spacing-small;
+  
+  .page-item {
+    @extend %interactive-element;
+
+    width: 40px;
+    height: 40px;
+
+    @include m.flex(row, center, center);
+
+    border-radius: v.$border-radius;
+    border: 1px solid #ddd;
+    
+    &.active {
+      background: v.$primary-color;
+      color: white;
+      border-color: v.$primary-color;
+    }
+    
+    &:hover:not(.active) {
+      background: color.adjust(v.$primary-color, $lightness: 40%);
+      border-color: v.$primary-color;
+    }
+  }
+}
+
+// Contact page
+.contact {
+  @extend %section-container;
+  
+  &__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: v.$spacing-xlarge;
+    
+    @include m.respond-to(md) {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+  
+  &__info {
+    h2 {
+      @include m.heading(28px);
+
+      margin-bottom: v.$spacing-medium;
+    }
+    
+    p {
+      color: v.$secondary-color;
+      margin-bottom: v.$spacing-large;
+    }
+  }
+  
+  &__details {
+    display: flex;
+    flex-direction: column;
+    gap: v.$spacing-large;
+  }
+  
+  &__item {
+    h3 {
+      font-size: 18px;
+      margin-bottom: v.$spacing-small;
+    }
+    
+    p {
+      color: v.$secondary-color;
+    }
+  }
+  
+  &__form {
+    h2 {
+      @include m.heading(28px);
+
+      margin-bottom: v.$spacing-medium;
+    }
+    
+    form {
+      background-color: white;
+      padding: v.$spacing-large;
+      border-radius: v.$border-radius-large;
+      box-shadow: v.$box-shadow;
+    }
+    
+    button[type='submit'] {
+      width: 100%;
+      margin-top: v.$spacing-small;
+    }
+  }
+}
+
+.map {
+  margin-top: v.$spacing-xlarge;
+  
+  &__container {
+    height: 400px;
+    border-radius: v.$border-radius-large;
+    overflow: hidden;
+    box-shadow: v.$box-shadow;
+  }
+}
+
+// Стили для резервного содержимого карты
+.map-fallback-container {
+  background-color: #f5f5f5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.map-fallback {
+  &__content {
+    padding: v.$spacing-large;
+    
+    h3 {
+      margin-bottom: v.$spacing-small;
+      color: v.$primary-color;
+    }
+    
+    p {
+      margin-bottom: v.$spacing-small;
+      color: v.$secondary-color;
+    }
+  }
+}
+
+// Стили для информационного окна на карте
+.map-info-window {
+  padding: v.$spacing-small;
+  
+  h3 {
+    margin-bottom: v.$spacing-small;
+    color: v.$primary-color;
+    font-size: 16px;
+  }
+  
+  p {
+    margin-bottom: 5px;
+    color: v.$secondary-color;
+    font-size: 14px;
+  }
+}
+
+// Дополнительные стили для адаптивности карточек
+@media (max-width: 480px) {
+  .course-card {
+    &__content {
+      padding: v.$spacing-small;
+    }
+    
+    &__title {
+      font-size: 18px;
+    }
+    
+    &__description {
+      font-size: 13px;
+      margin-bottom: v.$spacing-small;
+    }
+    
+    &__meta {
+      gap: 4px;
+      
+      .badge {
+        padding: 3px 6px;
+        font-size: 10px;
+      }
+    }
+  }
+}
+
+.fallback-image {
+  object-fit: contain !important;
+  background-color: #f5f5f5;
+  padding: 10%;
+}
+
+// Индикатор загрузки
+.loader {
+  width: 100%;
+  text-align: center;
+  padding: v.$spacing-large;
+  grid-column: 1 / -1; // Растягиваем на всю ширину сетки
+  
+  span {
+    display: inline-block;
+    position: relative;
+    color: v.$secondary-color;
+    font-size: 18px;
+    
+    &::after {
+      content: '...';
+      position: absolute;
+      overflow: hidden;
+      display: inline-block;
+      vertical-align: bottom;
+      animation: ellipsis 2s infinite;
+      width: 0;
+    }
+  }
+}
+
+@keyframes ellipsis {
+  0% { width: 0; }
+  33% { width: 0.2em; }
+  66% { width: 0.5em; }
+  100% { width: 0.8em; }
+}
+
+// Анимация появления карточек
+.fade-in {
+  opacity: 0;
+  animation: fade-in 0.5s ease-in-out forwards;
+}
+
+@keyframes fade-in {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+// Исправление стилей для кнопки "Показать больше"
+#show-more-btn {
+  display: block;
+  margin: v.$spacing-medium auto;
+  padding: v.$spacing-small v.$spacing-large;
+  transition: v.$transition-base;
+  
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: v.$box-shadow;
+  }
+  
+  &:active {
+    transform: translateY(0);
+  }
+}
+
+// Styles for New Releases page
+.new-releases {
+  @extend %section-container;
+  
+  &__grid {
+    @extend %responsive-grid;
+
+    margin-bottom: v.$spacing-xlarge;
+  }
+}
+
+// Styles for Short Courses page
+.short-courses-intro {
+  padding: v.$spacing-large 0;
+  background-color: color.adjust(v.$primary-color, $lightness: 40%);
+  
+  .intro-content {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+    
+    h2 {
+      margin-bottom: v.$spacing-large;
+      font-size: 28px;
+      
+      @include m.respond-to(md) {
+        font-size: 32px;
+      }
+    }
+  }
+  
+  .benefits-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: v.$spacing-large;
+    margin-top: v.$spacing-large;
+    
+    @include m.respond-to(md) {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+  
+  .benefit-item {
+    background-color: white;
+    border-radius: v.$border-radius-large;
+    padding: v.$spacing-large;
+    box-shadow: v.$box-shadow;
+    transition: v.$transition-base;
+    
+    &:hover {
+      transform: translateY(-5px);
+      box-shadow: v.$box-shadow-large;
+    }
+    
+    .benefit-icon {
+      font-size: 36px;
+      margin-bottom: v.$spacing-medium;
+    }
+    
+    h3 {
+      margin-bottom: v.$spacing-small;
+      font-size: 20px;
+    }
+    
+    p {
+      color: v.$secondary-color;
+    }
+  }
+}
+
+.short-courses {
+  @extend %section-container;
+  
+  &__grid {
+    @extend %responsive-grid;
+
+    margin-bottom: v.$spacing-xlarge;
+  }
+}
+
+// Testimonials section
+.testimonials {
+  background-color: color.adjust(v.$primary-color, $lightness: 38%);
+  padding: v.$spacing-xlarge 0;
+  
+  .testimonials-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: v.$spacing-large;
+    
+    @include m.respond-to(md) {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+  
+  .testimonial-card {
+    background-color: white;
+    border-radius: v.$border-radius-large;
+    padding: v.$spacing-large;
+    box-shadow: v.$box-shadow;
+    margin: 0;
+    
+    p {
+      font-style: italic;
+      margin-bottom: v.$spacing-medium;
+      position: relative;
+      
+      &::before {
+        content: '"';
+        font-size: 48px;
+        color: color.adjust(v.$primary-color, $lightness: 25%);
+        position: absolute;
+        top: -20px;
+        left: -10px;
+        opacity: 0.3;
+      }
+    }
+    
+    cite {
+      font-style: normal;
+      font-weight: 600;
+      color: v.$primary-color;
+    }
+  }
+}
+
+// Badges for special courses
+.new-badge, .short-badge {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  padding: 5px 10px;
+  border-radius: v.$border-radius;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  z-index: 1;
+}
+
+.new-badge {
+  background-color: v.$primary-color;
+  color: white;
+}
+
+.short-badge {
+  background-color: v.$success-color;
+  color: white;
+}
+
+.highlight-badge {
+  background-color: v.$success-color !important;
+  color: white !important;
+}

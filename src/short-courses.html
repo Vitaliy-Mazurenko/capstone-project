@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Short Courses - Online Learning Platform</title>
+    <link rel="stylesheet" href="css/main.css">
+    <script src="js/app.js" defer></script>
+    <script src="js/short-courses.js" defer></script>
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="header__logo">
+                <h2>EducationScape</h2>
+            </div>
+            <nav class="main-nav">
+                <ul class="main-nav-list">
+                    <li class="main-nav-item"><a href="index.html" class="main-nav-link">Home</a></li>
+                    <li class="main-nav-item">
+                        <a href="#" class="main-nav-link active">Courses</a>
+                        <ul class="nav-submenu">
+                            <li><a href="gallery.html">All Courses</a></li>
+                            <li><a href="new-releases.html">New Releases</a></li>
+                            <li><a href="short-courses.html" class="active">Short Courses</a></li>
+                        </ul>
+                    </li>
+                    <li class="main-nav-item"><a href="contacts.html" class="main-nav-link">Contacts</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="page-title">
+            <div class="container">
+                <h1>Short Courses</h1>
+                <p>Learn new skills in less time with our short, focused courses</p>
+            </div>
+        </section>
+
+        <section class="short-courses-intro">
+            <div class="container">
+                <div class="intro-content">
+                    <h2>Why Choose Short Courses?</h2>
+                    <div class="benefits-grid">
+                        <div class="benefit-item">
+                            <div class="benefit-icon">⏱️</div>
+                            <h3>Time-Efficient</h3>
+                            <p>Complete your learning in 8 weeks or less</p>
+                        </div>
+                        <div class="benefit-item">
+                            <div class="benefit-icon">🎯</div>
+                            <h3>Focused Content</h3>
+                            <p>Targeted learning on specific skills and topics</p>
+                        </div>
+                        <div class="benefit-item">
+                            <div class="benefit-icon">💼</div>
+                            <h3>Career Boost</h3>
+                            <p>Quickly add new skills to your professional toolkit</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="gallery">
+            <div class="container">
+                <div class="gallery__controls">
+                    <div class="gallery__search">
+                        <input type="text" id="search-input" placeholder="Search short courses...">
+                    </div>
+                    <div class="gallery__filters">
+                        <div class="filter-group">
+                            <label for="difficulty-filter">Difficulty:</label>
+                            <select id="difficulty-filter">
+                                <option value="all">All Levels</option>
+                                <option value="Beginner">Beginner</option>
+                                <option value="Intermediate">Intermediate</option>
+                                <option value="Advanced">Advanced</option>
+                            </select>
+                        </div>
+                        <div class="filter-group">
+                            <label for="duration-filter">Duration:</label>
+                            <select id="duration-filter">
+                                <option value="all">All Durations</option>
+                                <option value="4 weeks">4 weeks</option>
+                                <option value="6 weeks">6 weeks</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="gallery__grid" id="courses-container">
+                    <!-- Курсы будут добавлены с помощью JavaScript -->
+                    <div class="loader">
+                        <span>Loading short courses</span>
+                    </div>
+                </div>
+                
+                <div class="gallery__pagination">
+                    <button id="show-more-btn" class="btn">Show More</button>
+                    <div class="pagination" id="pagination-container">
+                        <!-- Пагинация будет добавлена с помощью JavaScript -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <section class="testimonials">
+            <div class="container">
+                <h2 class="section-title">What Our Students Say</h2>
+                <div class="testimonials-grid">
+                    <blockquote class="testimonial-card">
+                        <p>"I completed the Digital Marketing Fundamentals course in just 6 weeks and immediately applied what I learned to grow my business's online presence."</p>
+                        <cite>Sarah T., Small Business Owner</cite>
+                    </blockquote>
+                    <blockquote class="testimonial-card">
+                        <p>"The Photography Fundamentals course was perfect for my busy schedule. Short, intensive, and packed with practical knowledge."</p>
+                        <cite>Mark R., Aspiring Photographer</cite>
+                    </blockquote>
+                    <blockquote class="testimonial-card">
+                        <p>"I never thought I could learn UX/UI Design basics in just 6 weeks, but this course proved me wrong. Excellent structure!"</p>
+                        <cite>Jennifer L., Web Developer</cite>
+                    </blockquote>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-info">
+                    <h2>EducationScape</h2>
+                    <p>Your gateway to quality online education.</p>
+                </div>
+                <div class="footer-links">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="gallery.html">Courses</a></li>
+                        <li><a href="contacts.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-contact">
+                    <h3>Contact Us</h3>
+                    <p>Email: info@educationscape.com</p>
+                    <p>Phone: +1 (123) 456-7890</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 EducationScape. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html> 
