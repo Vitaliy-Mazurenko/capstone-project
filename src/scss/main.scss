@@ -33,6 +33,10 @@ body {
   line-height: v.$line-height-base;
   color: v.$text-color;
   background-color: v.$background-color;
+  
+  &.menu-open {
+    overflow: hidden;
+  }
 }
 
 img {
@@ -100,6 +104,10 @@ ul {
 
     padding-top: v.$spacing-medium;
     padding-bottom: v.$spacing-medium;
+    
+    @media (max-width: 767px) {
+      position: relative;
+    }
   }
   
   &__logo {
@@ -131,6 +139,88 @@ ul {
   }
 }
 
+// Индикатор загрузки (перемещаем выше)
+.loader {
+  width: 100%;
+  text-align: center;
+  padding: v.$spacing-large;
+  grid-column: 1 / -1;
+  
+  span {
+    display: inline-block;
+    position: relative;
+    color: v.$secondary-color;
+    font-size: 18px;
+    
+    &::after {
+      content: '...';
+      position: absolute;
+      overflow: hidden;
+      display: inline-block;
+      vertical-align: bottom;
+      animation: ellipsis 2s infinite;
+      width: 0;
+    }
+  }
+}
+
+// Гамбургер-меню (оставляем после)
+.hamburger-menu {
+  display: none;
+  position: relative;
+  width: 30px;
+  height: 24px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  z-index: 1001;
+  
+  span {
+    display: block;
+    position: absolute;
+    height: 3px;
+    width: 100%;
+    background: v.$primary-color;
+    border-radius: 3px;
+    transition: all 0.3s ease;
+    
+    &:first-child {
+      top: 0;
+    }
+    
+    &:nth-child(2) {
+      top: 50%;
+      transform: translateY(-50%);
+    }
+    
+    &:last-child {
+      bottom: 0;
+    }
+  }
+  
+  &.active {
+    span {
+      &:first-child {
+        transform: rotate(45deg);
+        top: 50%;
+      }
+      
+      &:nth-child(2) {
+        opacity: 0;
+      }
+      
+      &:last-child {
+        transform: rotate(-45deg);
+        bottom: 40%;
+      }
+    }
+  }
+  
+  @media (max-width: 767px) {
+    display: block;
+  }
+}
+
 .main-nav {
   &-list {
     @include m.flex(row, center, center);
@@ -155,8 +245,49 @@ ul {
     display: flex;
   }
   
-  @media (max-width: (v.$breakpoint-md - 1px)) {
+  @media (max-width: 767px) {
     display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: white;
+    padding: 80px 20px 20px;
+    z-index: 1000;
+    
+    &.active {
+      display: block;
+    }
+    
+    &-list {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 20px;
+    }
+    
+    &-item {
+      width: 100%;
+      margin: 0;
+      
+      .nav-submenu {
+        position: static;
+        width: 100%;
+        box-shadow: none;
+        display: none;
+        padding-left: 20px;
+        
+        &.show {
+          display: block;
+        }
+      }
+    }
+    
+    &-link {
+      display: block;
+      padding: 10px 0;
+      font-size: 18px;
+    }
   }
 }
 
@@ -382,7 +513,7 @@ ul {
   }
   
   &__next {
-    right: 16px;
+    right: v.$spacing-medium;
   }
   
   &__dots {
@@ -613,9 +744,6 @@ ul {
     @include m.respond-to(md) {
       @include m.flex(row, space-between, flex-start);
     }
-
-    right: 0;
-    display: none;
   }
   
   &__search {
@@ -886,31 +1014,6 @@ ul {
   object-fit: contain !important;
   background-color: #f5f5f5;
   padding: 10%;
-}
-
-// Индикатор загрузки
-.loader {
-  width: 100%;
-  text-align: center;
-  padding: v.$spacing-large;
-  grid-column: 1 / -1; // Растягиваем на всю ширину сетки
-  
-  span {
-    display: inline-block;
-    position: relative;
-    color: v.$secondary-color;
-    font-size: 18px;
-    
-    &::after {
-      content: '...';
-      position: absolute;
-      overflow: hidden;
-      display: inline-block;
-      vertical-align: bottom;
-      animation: ellipsis 2s infinite;
-      width: 0;
-    }
-  }
 }
 
 @keyframes ellipsis {
