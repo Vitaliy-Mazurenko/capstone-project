@@ -318,23 +318,30 @@ ul {
 }
 @media (max-width: 767px) {
   .main-nav {
-    display: none;
+    left: -800px;
+    transition: left 1.1s;
     position: fixed;
     top: 0;
-    left: 0;
     width: 100%;
     height: 100vh;
-    background: white;
+    backdrop-filter: blur(5px);
     padding: 80px 20px 20px;
     z-index: 1000;
   }
   .main-nav.active {
     display: block;
+    transition: left 1.1s;
+    left: 0;
   }
   .main-nav-list {
     flex-direction: column;
     align-items: flex-start;
-    gap: 20px;
+    justify-content: flex-start;
+    gap: 10px;
+    background: #f5f5f5;
+    height: calc(100% - 40px);
+    max-width: 350px;
+    padding: 16px;
   }
   .main-nav-item {
     width: 100%;
@@ -1144,6 +1151,65 @@ ul {
 .highlight-badge {
   background-color: #28a745 !important;
   color: white !important;
+}
+
+.nav-link-wrapper {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  cursor: pointer;
+}
+@media (max-width: 767px) {
+  .nav-link-wrapper {
+    padding: 8px 0;
+  }
+}
+.nav-link-wrapper .submenu-toggle {
+  display: none;
+  margin-left: 8px;
+  transition: transform 0.3s ease;
+}
+@media (max-width: 767px) {
+  .nav-link-wrapper .submenu-toggle {
+    display: block;
+  }
+}
+.nav-link-wrapper .submenu-toggle.active {
+  transform: rotate(180deg);
+  cursor: n-resize;
+}
+
+@media (max-width: 767px) {
+  .main-nav-item.has-submenu .nav-submenu {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-out;
+    padding: 0;
+    margin: 0;
+  }
+  .main-nav-item.has-submenu .nav-submenu.show {
+    max-height: 500px;
+    transition: max-height 0.5s ease-in;
+    padding-left: 20px;
+    margin-top: 10px;
+  }
+}
+
+@media (min-width: 768px) {
+  .main-nav-item:hover .nav-submenu {
+    display: block;
+  }
+  .main-nav-item .nav-submenu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: white;
+    width: 200px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+    padding: 8px 0;
+  }
 }
 
 /*# sourceMappingURL=main.css.map */

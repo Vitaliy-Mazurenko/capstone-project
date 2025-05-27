@@ -9,6 +9,7 @@
     <script src="js/slider.js" defer></script>
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
     <link rel="icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
     <header class="header">
@@ -24,8 +25,11 @@
             <nav class="main-nav">
                 <ul class="main-nav-list">
                     <li class="main-nav-item"><a href="index.html" class="main-nav-link active">Home</a></li>
-                    <li class="main-nav-item">
-                        <a href="#" class="main-nav-link">Courses</a>
+                    <li class="main-nav-item has-submenu">
+                        <div class="nav-link-wrapper">
+                            <a href="#" class="main-nav-link">Courses</a>
+                            <i class="fa fa-angle-down submenu-toggle"></i>
+                        </div>
                         <ul class="nav-submenu">
                             <li><a href="gallery.html">All Courses</a></li>
                             <li><a href="new-releases.html">New Releases</a></li>
