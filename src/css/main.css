@@ -357,6 +357,19 @@ ul {
   .main-nav-item .nav-submenu.show {
     display: block;
   }
+  .main-nav-item.has-submenu .nav-submenu {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-out;
+    padding: 0;
+    margin: 0;
+  }
+  .main-nav-item.has-submenu .nav-submenu.show {
+    max-height: 500px;
+    transition: max-height 0.5s ease-in;
+    padding-left: 20px;
+    margin-top: 10px;
+  }
   .main-nav-link {
     display: block;
     padding: 10px 0;
@@ -1179,36 +1192,9 @@ ul {
   cursor: n-resize;
 }
 
-@media (max-width: 767px) {
-  .main-nav-item.has-submenu .nav-submenu {
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.3s ease-out;
-    padding: 0;
-    margin: 0;
-  }
-  .main-nav-item.has-submenu .nav-submenu.show {
-    max-height: 500px;
-    transition: max-height 0.5s ease-in;
-    padding-left: 20px;
-    margin-top: 10px;
-  }
-}
-
 @media (min-width: 768px) {
   .main-nav-item:hover .nav-submenu {
     display: block;
-  }
-  .main-nav-item .nav-submenu {
-    display: none;
-    position: absolute;
-    top: 100%;
-    left: 0;
-    background: white;
-    width: 200px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    border-radius: 4px;
-    padding: 8px 0;
   }
 }
 

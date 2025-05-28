@@ -45,7 +45,7 @@ document.addEventListener('DOMContentLoaded', function() {
   // Закрытие меню при клике на пункт меню
   const menuLinks = nav.querySelectorAll('a');
   menuLinks.forEach(link => {
-    link.addEventListener('click', function(e) {
+    link.addEventListener('click', function() {
       if (window.innerWidth <= 767) {
         if (!this.closest('.has-submenu')) {
           hamburger.classList.remove('active');
